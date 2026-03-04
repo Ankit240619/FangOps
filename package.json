@@ -1,0 +1,36 @@
+{
+  "name": "fangops",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Self-hosted AI Agent Control Plane for IT & Business Operations",
+  "scripts": {
+    "dev": "pnpm --parallel --filter @fangops/* run dev",
+    "dev:api": "pnpm --filter @fangops/api run dev",
+    "dev:dashboard": "pnpm --filter @fangops/dashboard run dev",
+    "build": "pnpm --filter @fangops/* run build",
+    "test": "pnpm --filter @fangops/* run test",
+    "lint": "pnpm --filter @fangops/* run lint",
+    "clean": "pnpm --filter @fangops/* run clean",
+    "typecheck": "pnpm --filter @fangops/* run typecheck",
+    "setup": "node scripts/setup.js",
+    "db:push": "pnpm --filter @fangops/api run db:push",
+    "db:studio": "pnpm --filter @fangops/api run db:studio",
+    "db:seed": "pnpm --filter @fangops/api run db:seed"
+  },
+  "keywords": [
+    "aiops",
+    "agent",
+    "monitoring",
+    "auto-remediation",
+    "openfang"
+  ],
+  "author": "FangOps Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "devDependencies": {
+    "inquirer": "9.2.12"
+  }
+}

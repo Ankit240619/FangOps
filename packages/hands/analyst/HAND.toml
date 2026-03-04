@@ -1,0 +1,3 @@
+name = "Analyst"
+description = "Analyzes resolved incidents to generate postmortems and update knowledge graphs"
+version = "0.1.0"

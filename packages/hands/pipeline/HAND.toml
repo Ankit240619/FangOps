@@ -1,0 +1,23 @@
+[hand]
+name = "pipeline"
+description = "Monitors data engineering pipelines (Airflow, dbt) and detects schema drift"
+version = "0.1.0"
+tools = ["airflow_monitor", "dbt_monitor", "schema_drift_detector"]
+
+[schedule]
+# Check for schema drift or pull from Airflow periodically
+cron = "*/5 * * * *"
+
+[settings]
+model = "gpt-4o-mini"
+
+[settings.airflow]
+api_url = "http://localhost:8080/api/v1"
+poll_interval = "60s"
+
+[settings.dbt]
+run_results_path = "./target/run_results.json"
+
+[settings.drift]
+check_interval = "300s"
+target_db = "postgresql://user:pass@localhost:5432/db"

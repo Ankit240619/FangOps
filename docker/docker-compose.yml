@@ -1,0 +1,67 @@
+
+services:
+  fangops-api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=file:./dev.db
+      - SMTP_HOST=mailhog
+      - SMTP_PORT=1025
+    volumes:
+      - fangops-data:/app/data
+    networks:
+      - fangops-net
+
+  fangops-dashboard:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: builder
+    command: pnpm --filter dashboard dev --host 0.0.0.0
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:3000
+    networks:
+      - fangops-net
+    depends_on:
+      - fangops-api
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - fangops-net
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    networks:
+      - fangops-net
+    depends_on:
+      - prometheus
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025" # SMTP port
+      - "8025:8025" # Web UI port
+    networks:
+      - fangops-net
+
+networks:
+  fangops-net:
+    driver: bridge
+
+volumes:
+  fangops-data:

@@ -1,0 +1,16 @@
+[hand]
+name = "resolver"
+description = "Auto-remediation engine for executing runbooks against incidents"
+version = "0.1.0"
+tools = ["ssh_execute", "k8s_scale", "k8s_restart"]
+
+[schedule]
+
+[settings]
+model = "gpt-4o"
+max_budget = "$10.00/day"
+remediation_tier = "approval"
+
+[settings.execution]
+ssh_timeout_seconds = 60
+k8s_namespace = "default"

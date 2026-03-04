@@ -1,0 +1,27 @@
+{
+    "name": "@fangops/pipeline",
+    "version": "0.1.0",
+    "description": "FangOps Pipeline Hand — DataOps Monitoring (Airflow, dbt, Schema Drift)",
+    "type": "module",
+    "main": "./dist/index.js",
+    "scripts": {
+        "dev": "tsx watch src/index.ts",
+        "build": "tsc -p tsconfig.json",
+        "test": "vitest run",
+        "lint": "eslint src/",
+        "typecheck": "tsc --noEmit",
+        "clean": "rimraf dist"
+    },
+    "dependencies": {
+        "@fangops/core": "workspace:*",
+        "nanoid": "^5.0.0"
+    },
+    "devDependencies": {
+        "typescript": "^5.5.0",
+        "tsx": "^4.16.0",
+        "vitest": "^2.0.0",
+        "rimraf": "^6.0.0",
+        "@types/node": "^20.14.0",
+        "eslint": "^9.0.0"
+    }
+}

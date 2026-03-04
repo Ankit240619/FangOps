@@ -1,0 +1,8 @@
+packages:
+  - packages/*
+  - packages/hands/*
+
+onlyBuiltDependencies:
+  - bcrypt
+  - better-sqlite3
+  - esbuild

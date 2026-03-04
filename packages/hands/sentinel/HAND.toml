@@ -1,0 +1,26 @@
+[hand]
+name = "sentinel"
+description = "Monitors infrastructure, ingests alerts from Prometheus/webhooks, correlates noise into actionable incidents"
+version = "0.1.0"
+tools = ["prometheus_query", "webhook_receiver", "alert_correlate", "incident_create"]
+
+[schedule]
+# Run alert correlation every 60 seconds
+cron = "*/1 * * * *"
+
+[settings]
+model = "gpt-4o-mini"
+max_budget = "$5.00/day"
+remediation_tier = "observe"
+
+[settings.prometheus]
+scrape_interval = "30s"
+alert_rules_path = "./rules/"
+
+[settings.correlation]
+# Time window for grouping related alerts
+window_seconds = 300
+# Minimum alerts to trigger correlation
+min_alerts = 2
+# Similarity threshold for alert grouping (0-1)
+similarity_threshold = 0.7
